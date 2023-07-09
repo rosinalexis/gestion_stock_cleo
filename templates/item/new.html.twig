@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Item
+{% endblock %}
+
+{% block body %}
+	<h1>Ajouter un article</h1>
+
+	{{ include('item/_form.html.twig') }}
+
+	<a href="{{ path('app_item_index') }}" class="btn btn-primary">Retour à la liste</a>
+{% endblock %}

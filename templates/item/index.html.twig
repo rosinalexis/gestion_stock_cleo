@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Stock
+{% endblock %}
+
+{% block body %}
+	<h1 class="my-4 text-uppercase text-center">Gestion du stock</h1>
+
+	<div class="table-responsive">
+		<table class="table table-striped table-hover table-bordered border-dark">
+			<thead class="table-dark">
+				<tr>
+					<th>#</th>
+					<th>Réference</th>
+					<th>Nom</th>
+					<th>Quantité</th>
+					<th>Quantité de reserve</th>
+					<th>Date de création</th>
+					<th>Date de mise à jour</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for item in items %}
+					<tr>
+						<td>{{ item.id }}</td>
+						<td>{{ item.itemRef }}</td>
+						<td>{{ item.name }}</td>
+						<td>{{ item.quantity }}</td>
+						<td>{{ item.quantityR }}</td>
+						<td>{{ item.CreatedAt ? item.CreatedAt|date('Y-m-d H:i:s') : '' }}</td>
+						<td>{{ item.UpdatedAt ? item.UpdatedAt|date('Y-m-d H:i:s') : '' }}</td>
+						<td>
+							<a href="{{ path('app_item_show', {'id': item.id}) }}" class="text-decoration-none">
+								<i class="fa-solid fa-eye fa-xl"></i>
+							</a>
+							<a href="{{ path('app_item_edit', {'id': item.id}) }}" class="text-decoration-none">
+								<i class="fa-solid fa-pencil fa-xl"></i>
+							</a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="8">Pas d'information</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+	<div class="navigation flex justify-center my-3">
+		{{ knp_pagination_render(items) }}
+	</div>
+
+
+	<a href="{{ path('app_item_new') }}" class="btn btn-primary">Ajouter un article</a>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article
+{% endblock %}
+
+{% block body %}
+	<h1>Article</h1>
+
+	<div class="table-responsive">
+		<table class="table">
+			<tbody>
+				<tr>
+					<th>Id</th>
+					<td>{{ item.id }}</td>
+				</tr>
+				<tr>
+					<th>Réference Item</th>
+					<td>{{ item.itemRef }}</td>
+				</tr>
+				<tr>
+					<th>Nom</th>
+					<td>{{ item.name }}</td>
+				</tr>
+				<tr>
+					<th>Quantité</th>
+					<td>{{ item.quantity }}</td>
+				</tr>
+				<tr>
+					<th>Quantité_Reserve</th>
+					<td>{{ item.quantityR }}</td>
+				</tr>
+				<tr>
+					<th>Date de Création</th>
+					<td>{{ item.CreatedAt ? item.CreatedAt|date('Y-m-d H:i:s') : '' }}</td>
+				</tr>
+				<tr>
+					<th>Date de mise à jour</th>
+					<td>{{ item.UpdatedAt ? item.UpdatedAt|date('Y-m-d H:i:s') : '' }}</td>
+				</tr>
+				<tr>
+					<th>Code QR</th>
+					<td><img src="{{ asset(item.qrCode)}}" alt=""></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+
+	<a href="{{ path('app_item_index') }}" class="btn btn-primary">retour à la liste</a>
+
+	<a href="{{ path('app_item_edit', {'id': item.id}) }}" class="btn btn-primary">Modifier</a>
+
+	{{ include('item/_delete_form.html.twig') }}
+{% endblock %}
