@@ -40,8 +40,9 @@ class ItemController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $item->setItemRef(Uuid::v4());
-            $qrCode = $qrCodeService->qrCode($item->getId());
+            $itemId=Uuid::v4();
+            $item->setItemRef($itemId);
+            $qrCode = $qrCodeService->qrCode($itemId);
             $item->setQrCode($qrCode);
             $itemRepository->save($item, true);
 
